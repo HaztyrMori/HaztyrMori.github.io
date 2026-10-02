@@ -24,7 +24,7 @@
   html,body{background:#fbfaf8;color:var(--ink)}
   body{font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
 
-  .layout{display:grid;grid-template-columns:128px minmax(0,1fr) 128px;max-width:1560px;margin-inline:auto;min-height:100dvh}
+  .layout{display:grid;grid-template-columns:minmax(128px,1fr) minmax(0,1304px) minmax(128px,1fr);min-height:100dvh}
 
   /* ---------- eye panels ---------- */
   .eyes{position:sticky;top:0;height:100dvh;overflow:hidden;background:var(--ink);cursor:crosshair}
@@ -34,7 +34,7 @@
   @media (prefers-reduced-motion:reduce){.eyes canvas{transition:none}}
   .tag{z-index:1}
   .tag{position:absolute;left:16px;bottom:16px;background:var(--paper);color:var(--ink);border:var(--rule);
-       font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:8px 10px;box-shadow:4px 4px 0 var(--paper);pointer-events:none;white-space:normal;right:16px;text-align:center;line-height:1.35}
+       font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:8px 10px;box-shadow:4px 4px 0 var(--paper);pointer-events:none;white-space:normal;right:16px;max-width:200px;text-align:center;line-height:1.35}
   @media (max-width:880px){.tag{right:auto}}
 
   /* ---------- centre column ---------- */
@@ -312,7 +312,8 @@
   .legal{font:italic 400 17px/1.4 var(--serif);letter-spacing:0;color:var(--grey)}
   .lede{font:400 clamp(19px,2vw,22px)/1.48 var(--serif)}
   .lede::first-letter,.mentor-intro::first-letter{float:left;font:900 3.3em/.78 var(--display);margin:.08em .1em 0 0;color:var(--ink)}
-  .lede,.mentor-intro,.desc,.process dd,.paper-card p:not(.meta):not(.figures),.plain-text,.case-proc dd,.paper-findings li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+  .lede{text-align:left;hyphens:manual;-webkit-hyphens:manual}
+  .mentor-intro,.desc,.process dd,.paper-card p:not(.meta):not(.figures),.plain-text,.case-proc dd,.paper-findings li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
   .sec-head{border-top:5px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:12px}
   .sec-head h2{letter-spacing:-.005em}
   .mentor-intro{font-size:18px;line-height:1.55}
@@ -347,6 +348,17 @@
   .dogear.tr{top:0;right:0}.dogear.tr i{clip-path:polygon(0 0,0 100%,100% 100%)}
   .dogear.bl{bottom:0;left:0;filter:drop-shadow(3px -4px 4px rgba(0,0,0,.28))}.dogear.bl i{clip-path:polygon(0 0,100% 0,100% 100%)}
   @media (max-width:880px){.dogear,.burn,.crease.edge{display:none}}
+
+  /* contact: email first, then a ruled list of links */
+  .contact{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;align-items:start}
+  .contact-note{font:italic 400 18px/1.4 var(--serif);margin:0 0 10px;color:#3d3936}
+  .mail{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+  .links{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink);display:block}
+  .links li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--ink)}
+  .links .lk{font:600 11px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+  .links a{font:400 17px/1.4 var(--serif);color:var(--ink);text-decoration:none;border:0;padding:0;background:none!important;justify-self:start;border-bottom:1px solid transparent}
+  .links a:hover{background:none;color:var(--ink);border-bottom-color:var(--ink)}
+  @container (min-width: 760px){ .contact{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:48px} }
 
   /* ---------- Simplified Chinese: swap the Western display/mono faces for Noto Sans SC ----------
      "NIKLAUS" and other Latin-script proper nouns are excluded so the masthead never changes. */
@@ -384,7 +396,7 @@
     <header class="hero" id="top">
       <h1 class="nik">Niklaus</h1>
       <p class="legal" data-i18n="hero.legal">Officially, Tong Ye Zhang.</p>
-      <p class="lede" data-i18n="hero.lede">I build the tools, shaders and systems that help other people make games: student portfolios I've mentored in Unreal from first idea to final build, a teaching tool for game-design courses, and a real-time Obra Dinn dither ported to a Unity shader. By day I design government software at China Telecom Global; before that, an M.I. from the University of Toronto and a thesis on difficulty as negotiation.</p>
+      <p class="lede" data-i18n="hero.lede">I study games, design them, and teach others to make them. My research looks at how developers and players negotiate difficulty; my mentoring takes students from a first idea to finished projects in Unreal Engine; and my own builds, like a real-time Obra Dinn dither ported to a Unity shader, sit where an eye for aesthetics meets the tools that make it real. By day, I design government software at China Telecom Global.</p>
       <div class="slot r169 art" data-art="hero"><canvas aria-label="Dithered 3D test scene: an eyeball that follows your cursor, lit by a moving light"></canvas><span class="art-tag" data-i18n="hero.artTag">Live render · dithered in real time</span></div>
     </header>
 
@@ -543,12 +555,15 @@
     <section id="contact">
       <div class="sec-head"><h2 data-i18n="nav.contact">Contact</h2></div>
       <div class="contact">
-        <div class="mail"><code id="email">haztyr42@gmail.com</code><button type="button" id="copy" data-i18n="contact.copy">Copy</button></div>
-        <div class="links">
-          <a href="https://github.com/HaztyrMori" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/tong-ye-zhang" target="_blank" rel="noopener">LinkedIn ↗</a>
-          <a href="Tong_Ye_Zhang_Resume_TechArt.pdf" target="_blank" rel="noopener" data-i18n="contact.resume">Résumé PDF ↗</a>
+        <div class="mail-block">
+          <p class="contact-note" data-i18n="contact.note">Email is the best way to reach me.</p>
+          <div class="mail"><code id="email">haztyr42@gmail.com</code><button type="button" id="copy" data-i18n="contact.copy">Copy</button></div>
         </div>
+        <ul class="links">
+          <li><span class="lk" data-i18n="contact.l1">Résumé</span><a href="Tong_Ye_Zhang_Resume_TechArt.pdf" target="_blank" rel="noopener" data-i18n="contact.resume">PDF, 2 pages ↗</a></li>
+          <li><span class="lk">LinkedIn</span><a href="https://www.linkedin.com/in/tong-ye-zhang" target="_blank" rel="noopener">linkedin.com/in/tong-ye-zhang ↗</a></li>
+          <li><span class="lk">GitHub</span><a href="https://github.com/HaztyrMori" target="_blank" rel="noopener">github.com/HaztyrMori ↗</a></li>
+        </ul>
       </div>
       <footer><span>© 2026 Tong Ye Zhang</span></footer>
     </section>
@@ -622,7 +637,7 @@
       'nav.research': 'Research', 'nav.techart': 'Builds', 'nav.misc': 'Off the Clock', 'nav.games': "Games I've Made",
       'nav.background': 'Background', 'nav.contact': 'Contact', 'nav.resume': 'Résumé ↗',
       'hero.legal': 'Officially, Tong Ye Zhang.',
-      'hero.lede': "I build the tools, shaders and systems that help other people make games: student portfolios I've mentored in Unreal from first idea to final build, a teaching tool for game-design courses, and a real-time Obra Dinn dither ported to a Unity shader. By day I design government software at China Telecom Global; before that, an M.I. from the University of Toronto and a thesis on difficulty as negotiation.",
+      'hero.lede': "I study games, design them, and teach others to make them. My research looks at how developers and players negotiate difficulty; my mentoring takes students from a first idea to finished projects in Unreal Engine; and my own builds, like a real-time Obra Dinn dither ported to a Unity shader, sit where an eye for aesthetics meets the tools that make it real. By day, I design government software at China Telecom Global.",
       'hero.dl1': 'Portfolio Edition', 'hero.dl2': 'Hong Kong · October 2026', 'hero.dl3': 'Technical Art · Game Design', 'hero.r1': 'Technical Art', 'hero.r2': 'Shaders & Rendering', 'hero.r3': 'Tools & Systems', 'hero.startK': "Start here →", 'hero.start': "Mentoring: three student portfolios in Unreal, Maya and 3ds Max, guided from first idea to final build.",
       'hero.artTag': 'Live render · dithered in real time',
       'research.p1.meta': "2025 · Master's thesis, U of T · Complete", 'research.p1.title': 'Here Be Lions',
@@ -710,7 +725,7 @@
       'bg.sk2.cat': 'AI & automation', 'bg.sk2.val': 'Agentic AI skill development · MCP tool integration & orchestration · multi-agent workflow design · custom automation pipelines',
       'bg.sk3.cat': 'Game design', 'bg.sk3.val': 'Player community understanding & needs analysis · core mechanic & narrative design · playtesting & iteration',
       'bg.sk4.cat': 'Languages', 'bg.sk4.val': "English, Cantonese and Mandarin (native) · Japanese (conversational)",
-      'contact.copy': 'Copy', 'contact.resume': 'Résumé PDF ↗',
+      'contact.copy': 'Copy', 'contact.resume': 'PDF, 2 pages ↗', 'contact.note': 'Email is the best way to reach me.', 'contact.l1': 'Résumé',
       'contact.footer': 'Side panels: ~160 eyes drawn live in canvas. Hover to wake them',
       'dyn.caseOf': 'Case study {i} of {n}', 'dyn.paperOf': 'Paper {i} of {n}', 'dyn.close': 'Close ✕', 'dyn.next': 'Next: {title} →',
       'research.plainLabel': 'In plain terms',
@@ -798,7 +813,7 @@
       'nav.research': '研究', 'nav.techart': '作品', 'nav.misc': '工作之外', 'nav.games': '做过的游戏',
       'nav.background': '背景', 'nav.contact': '联系', 'nav.resume': '简历 ↗',
       'hero.legal': '张桐烨。',
-      'hero.lede': "我做帮助别人做游戏的工具、着色器和系统：我在 Unreal 里从第一个念头辅导到最终成品的学生作品集、一套游戏设计课程用的教学工具，以及一个移植成 Unity 实时着色器的 Obra Dinn 抖动效果。白天我在中国电信全球设计政府软件；在此之前，我在多伦多大学取得信息硕士，论文谈的是「难度即协商」。",
+      'hero.lede': "我研究游戏、设计游戏，也教别人做游戏。我的研究关注开发者与玩家如何协商难度；我辅导学生在 Unreal Engine 里把第一个念头做成完整作品；我自己的作品，比如移植成 Unity 实时着色器的 Obra Dinn 抖动效果，落在审美与实现工具相遇的地方。白天，我在中国电信全球设计政府软件。",
       'hero.dl1': '作品集特刊', 'hero.dl2': '香港 · 2026年10月', 'hero.dl3': '技术美术 · 游戏设计', 'hero.r1': '技术美术', 'hero.r2': '着色器与渲染', 'hero.r3': '工具与系统', 'hero.startK': "从这里开始 →", 'hero.start': "作品集辅导：三份用 Unreal、Maya 和 3ds Max 完成的学生作品集，从第一个念头带到最终成品。",
       'hero.artTag': '实时渲染 · 即时抖动',
       'research.p1.meta': '2025 · 硕士论文，多伦多大学 · 已完成', 'research.p1.title': 'Here Be Lions',
@@ -886,7 +901,7 @@
       'bg.sk2.cat': 'AI 与自动化', 'bg.sk2.val': 'Agentic AI技能开发 · MCP工具整合与协调 · 多代理工作流程设计 · 定制自动化流程',
       'bg.sk3.cat': '游戏设计', 'bg.sk3.val': '玩家社群理解与需求分析 · 核心机制与叙事设计 · playtesting与迭代',
       'bg.sk4.cat': '语言', 'bg.sk4.val': "英语、粤语、普通话（母语）· 日语（日常会话）",
-      'contact.copy': '复制', 'contact.resume': '简历 PDF ↗',
+      'contact.copy': '复制', 'contact.resume': 'PDF，共 2 页 ↗', 'contact.note': '联系我最好的方式是电子邮件。', 'contact.l1': '简历',
       'contact.footer': '两侧约160只眼睛以canvas即时绘制，鼠标移入即可唤醒',
       'dyn.caseOf': '案例研究 {i} / {n}', 'dyn.paperOf': '论文 {i} / {n}', 'dyn.close': '关闭 ✕', 'dyn.next': '下一个：{title} →',
       'research.plainLabel': '简单来说',
