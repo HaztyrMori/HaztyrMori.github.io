@@ -2203,3 +2203,177 @@
 })();
 </script>
 
+
+<style id="fx-css">
+/* ===== FX layer: bolder, livelier (additive) ===== */
+:root{--hot:#a8431f}
+.fx-progress{position:fixed;left:0;top:0;height:4px;width:100%;background:var(--hot);transform-origin:0 50%;transform:scaleX(0);z-index:950;pointer-events:none}
+/* hero */
+.hero{position:relative}
+h1.nik .ch{display:inline-block;will-change:transform;transition:color .25s}
+h1.nik .ch.hit{color:var(--hot)}
+.stamp{position:absolute;width:132px;height:132px;right:-22px;top:18px;z-index:5;pointer-events:none;animation:spin 22s linear infinite}
+.stamp svg{width:100%;height:100%;overflow:visible}
+.stamp text{font:700 11.5px var(--mono);letter-spacing:.2em;text-transform:uppercase;fill:var(--ink)}
+.stamp .disc{position:absolute;inset:0;border-radius:50%;background:var(--paper);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);z-index:-1}
+.stamp .eye{position:absolute;inset:0;display:grid;place-items:center;font:900 34px var(--display);color:var(--hot);animation:spin 22s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .slot[data-art=hero]{transition:transform .25s ease-out,box-shadow .25s;transform-style:preserve-3d;box-shadow:10px 10px 0 var(--ink)}
+/* marquee bands */
+.band{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-block:4px solid var(--ink);margin-block:56px;transform:rotate(-1.3deg);width:calc(100% + 24px);margin-left:-12px}
+.band.alt{background:var(--hot);color:var(--ink);transform:rotate(.9deg)}
+.band .track{display:flex;width:max-content;will-change:transform;padding-block:10px}
+.band span{font:900 clamp(34px,5.2cqi,68px)/1 var(--display);text-transform:uppercase;letter-spacing:.01em;white-space:nowrap;padding-right:.45em}
+.band span i{font-style:normal;color:var(--hot);padding-right:.45em}
+.band.alt span i{color:var(--paper)}
+.band .out{-webkit-text-stroke:2px currentColor;color:transparent}
+/* section heads */
+.sec-head{position:relative}
+.sec-head::after{content:attr(data-n);position:absolute;right:0;top:-4px;font:900 clamp(90px,13cqi,190px)/.8 var(--display);color:transparent;-webkit-text-stroke:2px var(--ink);opacity:.13;pointer-events:none;z-index:0}
+.sec-head h2{position:relative;z-index:1}
+html.fx-on .sec-head h2{clip-path:inset(0 0 100% 0);transform:translateY(46%);transition:clip-path .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+html.fx-on .sec-head.in h2{clip-path:inset(-10% 0 -10% 0);transform:none}
+html.fx-on .sec-head::before{content:"";position:absolute;left:0;top:-5px;height:5px;width:100%;background:var(--hot);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.2,.8,.2,1) .15s;z-index:2}
+html.fx-on .sec-head.in::before{transform:scaleX(1);animation:fade-hot .01s 1.4s forwards}
+@keyframes fade-hot{to{background:var(--ink)}}
+/* method steps */
+html.fx-on .method li{transition:background .5s,color .5s,transform .5s}
+html.fx-on .method li::before{transition:color .4s}
+html.fx-on .method li.on{background:var(--ink);color:var(--paper)}
+html.fx-on .method li.on::before{color:var(--hot)}
+html.fx-on .method li.on:hover{transform:translateY(-4px)}
+/* cards */
+.card.mentor,.work .card{transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.card .slot{overflow:hidden}
+.card .slot img{transition:filter .5s,transform .8s cubic-bezier(.2,.8,.2,1);filter:grayscale(.95) contrast(1.15)}
+.card .slot::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(26,18,16,.55) 1.1px,transparent 1.5px);background-size:5px 5px;mix-blend-mode:multiply;opacity:.55;transition:opacity .5s}
+.card:hover .slot img,.card:focus-within .slot img,.card.lit .slot img{filter:none;transform:scale(1.06)}
+.card:hover .slot::after,.card:focus-within .slot::after,.card.lit .slot::after{opacity:0}
+.card .glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.35),transparent 55%);opacity:0;transition:opacity .3s;z-index:3}
+.card:hover .glare{opacity:1}
+.card .case-btn{transition:transform .2s,box-shadow .2s,background .2s,color .2s}
+.card:hover .case-btn{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--hot)}
+.stat b{display:inline-block}
+.stat:hover{background:var(--hot)!important;color:var(--ink)!important}
+.stat:hover .meta{color:var(--ink)!important}
+.stat{transition:background .25s,color .25s}
+/* cursor */
+html.fx-cursor,html.fx-cursor *{cursor:none!important}
+.fx-c{position:fixed;left:0;top:0;pointer-events:none;z-index:2000;mix-blend-mode:difference;will-change:transform}
+.fx-c.dot{width:8px;height:8px;margin:-4px;border-radius:50%;background:#fff}
+.fx-c.ring{width:38px;height:38px;margin:-19px;border-radius:50%;border:2px solid #fff;transition:width .25s,height .25s,margin .25s,background .25s,border-radius .25s}
+.fx-c.ring.big{width:74px;height:74px;margin:-37px;background:#fff}
+.fx-c.ring.txt{width:64px;height:64px;margin:-32px;border-radius:50%}
+.fx-c.ring.down{width:24px;height:24px;margin:-12px}
+/* case overlay */
+.case-prog{position:sticky;top:0;height:5px;background:var(--hot);transform-origin:0 50%;transform:scaleX(0);z-index:5;margin-bottom:-5px}
+.case-body h2{text-shadow:6px 6px 0 rgba(168,67,31,.26)}
+@media (max-width:760px){.stamp{width:92px;height:92px;right:-6px;top:-8px}.stamp text{font-size:12px}.stamp .eye{font-size:24px}.band{margin-block:36px}}
+@media (prefers-reduced-motion:reduce){.stamp,.stamp .eye{animation:none}}
+
+</style>
+<script id="fx-js">
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const hero = $('.hero'), main = $('main'); if (!hero || !main) return;
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  // progress bar
+  const bar = document.createElement('div'); bar.className = 'fx-progress'; document.body.appendChild(bar);
+  // section numbers
+  $$('main section .sec-head').forEach((h, i) => h.dataset.n = '0' + (i + 1));
+
+  // hero: split letters
+  const nik = $('h1.nik', hero), chars = [];
+  if (nik && !reduce) {
+    const txt = nik.textContent.trim(); nik.setAttribute('aria-label', txt); nik.textContent = '';
+    [...txt].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.textContent = c; nik.appendChild(s); chars.push({ el: s, x: 0, y: 0, r: 0, tx: 0, ty: 0, tr: 0 }); });
+  }
+  // stamp
+  const slot = $('.slot[data-art=hero]', hero);
+  if (slot) {
+    const st = document.createElement('div'); st.className = 'stamp'; st.setAttribute('aria-hidden', 'true');
+    st.innerHTML = '<span class="disc"></span><svg viewBox="0 0 132 132"><defs><path id="stp" d="M66,66 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0"/></defs><text><textPath href="#stp" startOffset="0">MI · U of T · 2025 ✺ Vancouver ↔ Hong Kong ✺</textPath></text></svg><span class="eye">✺</span>';
+    hero.appendChild(st);
+    const place = () => { const hr = hero.getBoundingClientRect(), sr = slot.getBoundingClientRect(); const sz = st.offsetWidth; st.style.top = (sr.top - hr.top - sz * 0.38) + 'px'; st.style.right = 'auto'; st.style.left = (sr.right - hr.left - sz * 0.62) + 'px'; };
+    place(); addEventListener('resize', place); addEventListener('load', place); setTimeout(place, 600); setTimeout(place, 2200);
+  }
+
+  // marquee bands
+  const WORDS = [['Technical art', 'Game design', 'Games research', 'Teaching'], ['Shaders', 'Pipelines', 'Systems', 'Players']];
+  const makeBand = (words, alt) => {
+    const b = document.createElement('div'); b.className = 'band' + (alt ? ' alt' : ''); b.setAttribute('aria-hidden', 'true');
+    const one = words.map((w, i) => `<span${i % 2 ? ' class="out"' : ''}>${w}</span><span><i>✺</i></span>`).join('');
+    b.innerHTML = '<div class="track">' + one.repeat(4) + '</div>'; return b;
+  };
+  const bands = [];
+
+  // reveal on scroll
+  if (!reduce) document.documentElement.classList.add('fx-on');
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } }), { threshold: 0.2 });
+  $$('.sec-head').forEach(h => rio.observe(h));
+  // method steps sequence
+  const meth = $('.method');
+  if (meth) new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { $$('li', meth).forEach((li, i) => setTimeout(() => li.classList.add('on'), 250 + i * 330)); o.disconnect(); } }, { threshold: 0.35 }).observe(meth);
+  // mobile: color the card images as they pass the middle
+  if (!fine) new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('lit', e.isIntersecting)), { rootMargin: '-35% 0px -35% 0px' }).observe && $$('.card').forEach(c => new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('lit', e.isIntersecting)), { rootMargin: '-35% 0px -35% 0px' }).observe(c));
+  // count-up
+  $$('.stat b').forEach(b => {
+    const m = b.textContent.match(/^(\D*)([\d,]+)(\D*)$/); if (!m || reduce) return;
+    const n = +m[2].replace(/,/g, ''), fmt = v => Math.round(v).toLocaleString('en-US');
+    b.textContent = m[1] + '0' + m[3];
+    new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disconnect(); const t0 = performance.now(); const step = t => { const k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3); b.textContent = m[1] + fmt(n * e) + m[3]; if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }, { threshold: 0.6 }).observe(b);
+  });
+
+  // cards tilt
+  if (fine && !reduce) $$('.card.mentor,.work .card').forEach(c => {
+    const g = document.createElement('span'); g.className = 'glare'; const s = $('.slot', c); (s || c).appendChild(g);
+    c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height; c.style.transform = `perspective(900px) rotateX(${(.5 - py) * 7}deg) rotateY(${(px - .5) * 9}deg) translateZ(0)`; if (s) { const sr = s.getBoundingClientRect(); g.style.setProperty('--gx', ((e.clientX - sr.left) / sr.width * 100) + '%'); g.style.setProperty('--gy', ((e.clientY - sr.top) / sr.height * 100) + '%'); } });
+    c.addEventListener('pointerleave', () => { c.style.transform = ''; });
+  });
+  // hero art tilt
+  if (fine && !reduce && slot) {
+    addEventListener('pointermove', e => { const r = slot.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; const px = (e.clientX - (r.left + r.width / 2)) / innerWidth, py = (e.clientY - (r.top + r.height / 2)) / innerHeight; slot.style.transform = `perspective(1000px) rotateY(${px * 10}deg) rotateX(${-py * 10}deg)`; }, { passive: true });
+  }
+
+  // pointer for letters
+  let mx = -999, my = -999;
+  addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+  addEventListener('pointerleave', () => { mx = my = -999; });
+
+  // cursor
+  let cx = -100, cy = -100, rx = -100, ry = -100, ring, dot;
+  if (fine && !reduce) {
+    document.documentElement.classList.add('fx-cursor');
+    dot = document.createElement('div'); dot.className = 'fx-c dot'; ring = document.createElement('div'); ring.className = 'fx-c ring';
+    document.body.append(ring, dot);
+    addEventListener('pointermove', e => { cx = e.clientX; cy = e.clientY; const t = e.target.closest && e.target.closest('a,button,.case-open,.card,.stat,.eyes'); ring.classList.toggle('big', !!(t && t.matches('a,button,.case-open'))); ring.classList.toggle('txt', !!(t && t.matches('.card,.stat'))); }, { passive: true });
+    addEventListener('pointerdown', () => ring.classList.add('down')); addEventListener('pointerup', () => ring.classList.remove('down'));
+  }
+
+  // case overlay progress
+  const caseObs = new MutationObserver(() => $$('.case').forEach(c => { if (!c.querySelector('.case-prog')) { const p = document.createElement('div'); p.className = 'case-prog'; c.prepend(p); c.addEventListener('scroll', () => { p.style.transform = `scaleX(${c.scrollTop / Math.max(1, c.scrollHeight - c.clientHeight)})`; }, { passive: true }); } }));
+  caseObs.observe(document.body, { childList: true, subtree: true });
+
+  // main loop
+  let lastY = scrollY, vel = 0;
+  const loop = () => {
+    const y = scrollY; vel = lerp(vel, y - lastY, .15); lastY = y;
+    bar.style.transform = `scaleX(${y / Math.max(1, document.documentElement.scrollHeight - innerHeight)})`;
+    if (!reduce) bands.forEach(b => { b.x += b.dir * (0.6 + Math.min(14, Math.abs(vel) * .35)); const w = b.tr.scrollWidth / 4; if (b.x <= -w) b.x += w; if (b.x >= 0) b.x -= w; b.tr.style.transform = `translate3d(${b.x}px,0,0)`; });
+    if (chars.length && y < innerHeight) chars.forEach(c => {
+      const r = c.el.getBoundingClientRect(), ox = r.left + r.width / 2 - c.x, oy = r.top + r.height / 2 - c.y, dx = mx - ox, dy = my - oy, d = Math.hypot(dx, dy), R = 230;
+      if (d < R) { const k = 1 - d / R; c.tx = -dx / d * k * 34; c.ty = -dy / d * k * 26; c.tr = (dx / R) * -16; } else { c.tx = c.ty = c.tr = 0; }
+      c.x = lerp(c.x, c.tx, .14); c.y = lerp(c.y, c.ty, .14); c.r = lerp(c.r, c.tr, .14);
+      c.el.style.transform = `translate(${c.x.toFixed(1)}px,${c.y.toFixed(1)}px) rotate(${c.r.toFixed(1)}deg)`;
+      c.el.classList.toggle('hit', d < 70);
+    });
+    if (ring) { rx = lerp(rx, cx, .18); ry = lerp(ry, cy, .18); ring.style.transform = `translate(${rx}px,${ry}px)`; dot.style.transform = `translate(${cx}px,${cy}px)`; }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+})();
+
+</script>
