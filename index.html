@@ -2172,12 +2172,8 @@
     fx.innerHTML = '';
     const E = 0, E2 = 0;
     const wear = (dir) => { const st = []; let q = 0; while (q < 100) { st.push(`rgba(0,0,0,${(0.45 + r() * 0.55).toFixed(2)}) ${q.toFixed(0)}%`); q += 6 + r() * 16; } return `linear-gradient(${dir},${st.join(',')})`; };
-    // two deep horizontal folds
-    for (const f of [0.34, 0.67]) {
-      const c = document.createElement('i'); c.className = 'crease';
-      c.style.top = H * (f + (r() - 0.5) * 0.04) + 'px'; c.style.transform = `rotate(${(r() - 0.5) * 0.4}deg)`;
-      c.style.setProperty('--wear', wear('to right')); fx.appendChild(c);
-    }
+    // horizontal folds removed; the same random draws are still consumed so the burnt edges look exactly as before
+    for (let i = 0; i < 2; i++) { r(); r(); wear('to right'); }
     if (!wide) { main.style.clipPath = ''; return; }
     // burn depth along each edge (px): mostly shallow, with wandering deeper bites
     const nL = wave(r), nR = wave(r), nT = wave(r), nB = wave(r);
